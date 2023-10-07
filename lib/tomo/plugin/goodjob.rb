@@ -1,19 +1,12 @@
 require "tomo"
-require_relative "goodjob/helpers"
 require_relative "goodjob/tasks"
 require_relative "goodjob/version"
 
-module Tomo
-  module Plugin
-    module Goodjob
-      extend Tomo::PluginDSL
+module Tomo::Plugin::Goodjob
+  extend Tomo::PluginDSL
 
-      # TODO: initialize this plugin's settings with default values
-      # defaults goodjob_setting: "foo",
-      #          goodjob_another_setting: "bar"
-
-      tasks Tomo::Plugin::Goodjob::Tasks
-      helpers Tomo::Plugin::Goodjob::Helpers
-    end
-  end
+  tasks Tomo::Plugin::Goodjob::Tasks
+  defaults goodjob_systemd_service: "goodjob_%{application}.service",
+           goodjob_systemd_service_path: ".config/systemd/user/%{goodjob_systemd_service}",
+           goodjob_systemd_service_template_path: File.expand_path("goodjob/service.erb", __dir__)
 end
