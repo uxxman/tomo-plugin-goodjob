@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
-require "tomo/plugin/example"
+require "tomo/plugin/goodjob"
 require "tomo/testing"
 
 require "minitest/autorun"
